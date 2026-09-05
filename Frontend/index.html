@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Risk Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ============================= -->
+    <!-- SIDEBAR -->
+    <!-- ============================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">AI</div>
+
+            <div>
+                <h2>Risk Manager</h2>
+                <span>AI-Powered Protection</span>
+            </div>
+        </div>
+
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">▦</span>
+                Dashboard
+            </a>
+
+            <a href="#orders" class="nav-item">
+                <span class="nav-icon">◫</span>
+                Orders
+            </a>
+
+            <a href="#predict" class="nav-item">
+                <span class="nav-icon">✦</span>
+                Risk Prediction
+            </a>
+
+            <a href="#analytics" class="nav-item">
+                <span class="nav-icon">◒</span>
+                Analytics
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="protection-status">
+                <div class="status-dot"></div>
+
+                <div>
+                    <strong>Protection Active</strong>
+                    <span>AI monitoring is running</span>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ============================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================= -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">RISK INTELLIGENCE</p>
+                <h1>AI Risk Manager</h1>
+                <p class="subtitle">
+                    Monitor and prevent revenue loss from high-risk orders.
+                </p>
+            </div>
+
+            <div class="header-actions">
+
+                <div class="system-status">
+                    <span class="online-dot"></span>
+                    System Online
+                </div>
+
+                <button class="notification-button">
+                    🔔
+                </button>
+
+                <div class="profile">
+                    <div class="profile-avatar">RM</div>
+
+                    <div>
+                        <strong>Risk Manager</strong>
+                        <span>Administrator</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ============================= -->
+        <!-- KPI CARDS -->
+        <!-- ============================= -->
+
+        <section class="kpi-grid">
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>Total Orders</span>
+                    <div class="kpi-icon blue">▣</div>
+                </div>
+
+                <div class="kpi-value" id="totalOrders">5,000</div>
+
+                <div class="kpi-change positive">
+                    ↑ 12.4%
+                    <span>vs last month</span>
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>High Risk Orders</span>
+                    <div class="kpi-icon red">!</div>
+                </div>
+
+                <div class="kpi-value" id="highRiskCount">—</div>
+
+                <div class="kpi-change negative">
+                    Requires attention
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>Return Risk</span>
+                    <div class="kpi-icon orange">◈</div>
+                </div>
+
+                <div class="kpi-value" id="returnRisk">—</div>
+
+                <div class="kpi-change">
+                    Model prediction
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>High-Risk Order Value</span>
+                    <div class="kpi-icon purple">₹</div>
+                </div>
+
+                <div class="kpi-value" id="potentialLoss">₹—</div>
+
+                <div class="kpi-change negative">
+                    Estimated exposure
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- MAIN GRID -->
+        <!-- ============================= -->
+
+        <section class="dashboard-grid">
+
+            <!-- MODEL PERFORMANCE -->
+
+<div class="panel model-performance">
+
+    <div class="panel-header">
+        <div>
+            <h2>Model Performance</h2>
+            <p>Evaluation on held-out test data</p>
+        </div>
+
+        <span class="performance-badge">
+            1,000 Test Samples
+        </span>
+    </div>
+
+    <div class="metrics-grid">
+
+        <div class="metric-card">
+            <span>Accuracy</span>
+            <strong id="modelAccuracy">--%</strong>
+        </div>
+
+        <div class="metric-card">
+            <span>Precision</span>
+            <strong id="modelPrecision">--%</strong>
+        </div>
+
+        <div class="metric-card">
+            <span>Recall</span>
+            <strong id="modelRecall">--%</strong>
+        </div>
+
+        <div class="metric-card">
+            <span>F1 Score</span>
+            <strong id="modelF1">--%</strong>
+        </div>
+
+    </div>
+
+    <div class="confusion-summary">
+
+        <div>
+            <span>False Positives</span>
+            <strong id="falsePositives">--</strong>
+        </div>
+
+        <div>
+            <span>False Negatives</span>
+            <strong id="falseNegatives">--</strong>
+        </div>
+
+        <div>
+            <span>Estimated Error Cost</span>
+            <strong id="errorCost">₹--</strong>
+        </div>
+
+    </div>
+    
+
+</div>
+<div class="confusion-matrix">
+    <h3>Confusion Matrix</h3>
+
+    <div class="matrix-grid">
+        <div class="matrix-cell">
+            <span>True Negatives</span>
+            <strong id="trueNegatives">--</strong>
+        </div>
+
+        <div class="matrix-cell">
+            <span>False Positives</span>
+            <strong id="matrixFalsePositives">--</strong>
+        </div>
+
+        <div class="matrix-cell">
+            <span>False Negatives</span>
+            <strong id="matrixFalseNegatives">--</strong>
+        </div>
+
+        <div class="matrix-cell">
+            <span>True Positives</span>
+            <strong id="truePositives">--</strong>
+        </div>
+    </div>
+</div>
+
+
+
+            <!-- RISK OVERVIEW -->
+
+            <div class="panel risk-overview" id="analytics">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Risk Overview</h2>
+                        <p>Distribution of predicted order risk</p>
+                    </div>
+
+                    <select id="riskPeriod">
+                        <option>Last 30 days</option>
+                        <option>Last 7 days</option>
+                        <option>All time</option>
+                    </select>
+
+                </div>
+
+
+                <div class="risk-chart">
+
+                    <div class="donut-chart">
+                        <div class="donut-center">
+                            <strong id="donutTotalOrders">5,000</strong>
+                            <span>Orders</span>
+                        </div>
+                    </div>
+
+
+                    <div class="risk-legend">
+
+                        <div class="legend-item">
+                            <span class="legend-color low"></span>
+
+                            <div>
+                                <strong>Low Risk</strong>
+                                <span>Normal processing</span>
+                            </div>
+
+                            <b><span id="lowRiskPercent">62%</span></b>
+                        </div>
+
+
+                        <div class="legend-item">
+                            <span class="legend-color medium"></span>
+
+                            <div>
+                                <strong>Medium Risk</strong>
+                                <span>Verification needed</span>
+                            </div>
+
+                            <b><span id="mediumRiskPercent">24%</span></b>
+                        </div>
+
+
+                        <div class="legend-item">
+                            <span class="legend-color high"></span>
+
+                            <div>
+                                <strong>High Risk</strong>
+                                <span>Immediate review</span>
+                            </div>
+
+                            <b><span id="highRiskPercent">14%</span></b>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- AI PREDICTOR -->
+
+            <div class="panel predictor-panel" id="predict">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>AI Risk Prediction</h2>
+                        <p>Analyze an order before dispatch</p>
+                    </div>
+
+                    <div class="ai-badge">
+                        ✦ AI
+                    </div>
+
+                </div>
+
+
+                <form id="predictionForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Order Value</label>
+
+                            <div class="input-wrapper">
+                                <span>₹</span>
+                                <input
+                                    type="number"
+                                    id="order_value"
+                                    value="8999"
+                                    min="0"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Previous Orders</label>
+
+                            <input
+                                type="number"
+                                id="customer_orders"
+                                value="12"
+                                min="1"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Previous Returns</label>
+
+                            <input
+                                type="number"
+                                id="customer_returns"
+                                value="7"
+                                min="0"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Discount %</label>
+
+                            <input
+                                type="number"
+                                id="discount_percent"
+                                value="40"
+                                min="0"
+                                max="100"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Delivery Distance</label>
+
+                            <div class="input-wrapper">
+                                <input
+                                    type="number"
+                                    id="delivery_distance_km"
+                                    value="18"
+                                    min="0"
+                                    required
+                                >
+                                <span>km</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Days Since Last Order</label>
+
+                            <input
+                                type="number"
+                                id="days_since_last_order"
+                                value="5"
+                                min="0"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Product Category</label>
+
+                            <select id="product_category">
+
+                                <option>Electronics</option>
+                                <option>Clothing</option>
+                                <option>Footwear</option>
+                                <option>Home</option>
+                                <option>Books</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Payment Method</label>
+
+                            <select id="payment_method">
+
+                                <option>UPI</option>
+                                <option>Credit Card</option>
+                                <option>Debit Card</option>
+                                <option>COD</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <button type="submit" class="predict-button">
+
+                        <span>✦</span>
+                        Analyze Risk
+
+                    </button>
+
+                </form>
+
+
+                <!-- PREDICTION RESULT -->
+
+                <div class="prediction-result" id="predictionResult">
+
+                    <div class="result-placeholder">
+
+                        <div class="placeholder-icon">✦</div>
+
+                        <strong>Ready to analyze</strong>
+
+                        <span>
+                            Enter order details and click Analyze Risk.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- HIGH RISK ORDERS -->
+        <!-- ============================= -->
+
+        <section class="panel orders-panel" id="orders">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>High-Risk Orders</h2>
+                    <p>Orders requiring merchant attention</p>
+                </div>
+
+                <button class="view-all-button" id="viewAllOrders">
+                    View All →
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Order Value</th>
+                            <th>Customer Return Rate</th>
+                            <th>Risk Score</th>
+                            <th>Risk Level</th>
+                            <th>Recommended</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="ordersTable">
+
+                        <tr>
+                            <td><strong>#ORD-10291</strong></td>
+                            <td>₹8,999</td>
+                            <td>58.3%</td>
+
+                            <td>
+                                <div class="table-risk">
+                                    <div class="mini-progress">
+                                        <span style="width: 94%"></span>
+                                    </div>
+                                    <strong>94%</strong>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="risk-pill high">HIGH</span>
+                            </td>
+
+                            <td>Review before dispatch</td>
+                        </tr>
+
+
+                        <tr>
+                            <td><strong>#ORD-10432</strong></td>
+                            <td>₹12,499</td>
+                            <td>52.0%</td>
+
+                            <td>
+                                <div class="table-risk">
+                                    <div class="mini-progress">
+                                        <span style="width: 89%"></span>
+                                    </div>
+                                    <strong>89%</strong>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="risk-pill high">HIGH</span>
+                            </td>
+
+                            <td>Additional verification</td>
+                        </tr>
+
+
+                        <tr>
+                            <td><strong>#ORD-10721</strong></td>
+                            <td>₹6,499</td>
+                            <td>47.6%</td>
+
+                            <td>
+                                <div class="table-risk">
+                                    <div class="mini-progress">
+                                        <span style="width: 76%"></span>
+                                    </div>
+                                    <strong>76%</strong>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="risk-pill high">HIGH</span>
+                            </td>
+
+                            <td>Review before dispatch</td>
+                        </tr>
+
+
+                        <tr>
+                            <td><strong>#ORD-10984</strong></td>
+                            <td>₹4,299</td>
+                            <td>43.2%</td>
+
+                            <td>
+                                <div class="table-risk">
+                                    <div class="mini-progress">
+                                        <span style="width: 72%"></span>
+                                    </div>
+                                    <strong>72%</strong>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="risk-pill high">HIGH</span>
+                            </td>
+
+                            <td>Additional verification</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- FOOTER -->
+        <!-- ============================= -->
+
+        <footer>
+
+            <span>AI Risk Manager v1.0</span>
+
+            <span>
+                Defense-only risk intelligence system
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
